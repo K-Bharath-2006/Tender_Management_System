@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:8080/api', // Spring Boot backend URL
+    baseURL: 'https://tendermanagementsystem-production.up.railway.app/api', // Spring Boot backend URL
 });
 
 // Configure interceptor to add authorization token
