@@ -4,8 +4,10 @@ import Navbar from '../components/Navbar';
 import TenderCard from '../components/TenderCard';
 import api from '../api/axios';
 import { BiSearchAlt, BiTrendingUp, BiShieldQuarter } from 'react-icons/bi';
+import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
+    const { user } = useAuth();
     const [tenders, setTenders] = useState([]);
 
     useEffect(() => {
@@ -43,12 +45,20 @@ const Home = () => {
                                 A unified portal for publishing state tenders, managing transparent bidding, and empowering infrastructure development with absolute clarity.
                             </p>
                             <div className="flex gap-4 pt-4">
-                                <Link to="/login" className="bg-primary-600 hover:bg-primary-500 text-white px-6 py-3 rounded-lg font-medium transition-colors shadow-lg shadow-primary-600/30">
-                                    Login to Portal
-                                </Link>
-                                <Link to="/results" className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg font-medium transition-colors border border-white/20 backdrop-blur-sm">
-                                    View Results
-                                </Link>
+                                {!user ? (
+                                    <Link to="/login" className="bg-primary-600 hover:bg-primary-500 text-white px-6 py-3 rounded-lg font-medium transition-colors shadow-lg shadow-primary-600/30">
+                                        Login to Portal
+                                    </Link>
+                                ) : (
+                                    <Link to="/dashboard" className="bg-primary-600 hover:bg-primary-500 text-white px-6 py-3 rounded-lg font-medium transition-colors shadow-lg shadow-primary-600/30">
+                                        Go to Dashboard
+                                    </Link>
+                                )}
+                                {user && (
+                                    <Link to="/results" className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg font-medium transition-colors border border-white/20 backdrop-blur-sm">
+                                        View Results
+                                    </Link>
+                                )}
                             </div>
                         </div>
 
