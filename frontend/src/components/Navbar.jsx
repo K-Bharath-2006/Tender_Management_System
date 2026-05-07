@@ -27,7 +27,10 @@ const Navbar = () => {
                         <Link to="/" className="text-slate-600 hover:text-primary-600 font-medium px-3 py-2 rounded-md transition-colors">Home</Link>
                         <Link to="/results" className="text-slate-600 hover:text-primary-600 font-medium px-3 py-2 rounded-md transition-colors">Results</Link>
                         {user?.role === 'ROLE_VENDOR' && (
-                            <Link to="/tenders" className="text-slate-600 hover:text-primary-600 font-medium px-3 py-2 rounded-md transition-colors">Tenders</Link>
+                            <>
+                                <Link to="/tenders" className="text-slate-600 hover:text-primary-600 font-medium px-3 py-2 rounded-md transition-colors">Tenders</Link>
+                                <Link to="/my-bids" className="text-slate-600 hover:text-primary-600 font-medium px-3 py-2 rounded-md transition-colors">My Bids</Link>
+                            </>
                         )}
                         {user?.role === 'ROLE_ADMIN' && (
                             <Link to="/dashboard" className="text-slate-600 hover:text-primary-600 font-medium px-3 py-2 rounded-md transition-colors">Dashboard</Link>

@@ -12,6 +12,7 @@ import SubmitBid from '../pages/SubmitBid';
 import Results from '../pages/Results';
 
 import Dashboard from '../pages/Dashboard';
+import MyBids from '../pages/MyBids';
 import CreateTender from '../pages/CreateTender';
 import ManageTenders from '../pages/ManageTenders';
 import ViewBids from '../pages/ViewBids';
@@ -33,6 +34,7 @@ const AppRoutes = () => {
 
             <Route element={<ProtectedRoute allowedRoles={['ROLE_VENDOR']} />}>
                 <Route path="/submit-bid/:id" element={<SubmitBid />} />
+                <Route path="/my-bids" element={<MyBids />} />
             </Route>
 
             {/* Protected Admin Routes */}
