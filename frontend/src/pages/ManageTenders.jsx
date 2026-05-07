@@ -98,7 +98,7 @@ const ManageTenders = () => {
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                         <div className="flex items-center justify-end gap-3">
-                                            <Link to={`/admin/view-bids/${tender.id}`} className="text-primary-600 hover:text-primary-800 flex items-center gap-1" title="View Bids">
+                                            <Link to={`/view-bids/${tender.id}`} className="text-primary-600 hover:text-primary-800 flex items-center gap-1" title="View Bids">
                                                 <BiListUl className="w-5 h-5" />
                                             </Link>
                                             <button className="text-slate-400 hover:text-slate-600 flex items-center gap-1" title="Edit (Dummy)">
