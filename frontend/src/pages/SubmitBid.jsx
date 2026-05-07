@@ -113,10 +113,7 @@ const SubmitBid = () => {
                             ></textarea>
                         </div>
 
-                        <div className="border border-dashed border-slate-300 rounded-lg p-6 bg-slate-50 text-center">
-                            <p className="text-sm text-slate-500 mb-2">Upload Technical Documents (PDF, max 10MB)</p>
-                            <input type="file" className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100" />
-                        </div>
+
 
                         <div className="pt-4 flex justify-end">
                             <button
