@@ -46,8 +46,8 @@ const Dashboard = () => {
 
 
     const totalTenders = tenders.length;
-    const activeTenders = tenders.filter(t => t.status === 'Open' || !t.status).length;
-    const closedTenders = tenders.filter(t => t.status === 'Closed').length;
+    const activeTenders = tenders.filter(t => !t.status || t.status.toUpperCase() === 'OPEN').length;
+    const closedTenders = tenders.filter(t => t.status && t.status.toUpperCase() === 'CLOSED').length;
     const totalBids = bids.length;
 
     const statCards = [

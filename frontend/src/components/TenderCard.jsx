@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { BiRupee, BiCalendar, BiMap, BiBuilding, BiTime } from 'react-icons/bi';
 
 const TenderCard = ({ tender }) => {
-    const isClosed = tender.status === 'Closed';
+    const isClosed = tender.status?.toUpperCase() === 'CLOSED';
 
     return (
         <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-all duration-300 group">

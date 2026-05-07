@@ -62,7 +62,8 @@ const ManageTenders = () => {
 
     // Assuming we want to toggle status via API PUT
     const handleToggleStatus = async (tender) => {
-        const newStatus = tender.status === 'Open' ? 'Closed' : 'Open';
+        const isCurrentlyOpen = tender.status?.toUpperCase() !== 'CLOSED';
+        const newStatus = isCurrentlyOpen ? 'CLOSED' : 'OPEN';
         try {
             const updatedTender = { ...tender, status: newStatus };
             await api.put(`/tenders/${tender.id}`, updatedTender);
@@ -108,7 +109,7 @@ const ManageTenders = () => {
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <button
                                             onClick={() => handleToggleStatus(tender)}
-                                            className={`text-xs font-semibold px-2.5 py-1 rounded-full border border-transparent transition-all hover:opacity-80 ${tender.status === 'Closed' ? 'bg-red-50 text-red-700 border-red-200' : 'bg-green-50 text-green-700 border-green-200'
+                                            className={`text-xs font-semibold px-2.5 py-1 rounded-full border border-transparent transition-all hover:opacity-80 ${tender.status?.toUpperCase() === 'CLOSED' ? 'bg-red-50 text-red-700 border-red-200' : 'bg-green-50 text-green-700 border-green-200'
                                                 }`}
                                             title="Click to toggle status"
                                         >
