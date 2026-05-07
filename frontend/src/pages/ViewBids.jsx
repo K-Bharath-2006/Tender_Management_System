@@ -50,20 +50,41 @@ const ViewBids = () => {
         }
     }, [tenderId, user]);
 
-    const handleUpdateStatus = async (bidId, newStatus) => {
-        if (window.confirm(`Are you sure you want to mark this bid as ${newStatus}?`)) {
-            try {
-                await api.put(`/bids/${bidId}/status`, { status: newStatus });
-                
-                // Update local state
-                setBids(bids.map(b => b.id === bidId ? { ...b, status: newStatus } : b));
-                
-                toast.success(`Bid ${newStatus} successfully.`);
-            } catch (error) {
-                console.error("Failed to update bid status", error);
-                toast.error("Failed to update bid status.");
-            }
-        }
+    const handleUpdateStatus = (bidId, newStatus) => {
+        const actionColor = newStatus === 'APPROVED' ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700';
+        
+        toast((t) => (
+            <div className="flex flex-col gap-3">
+                <p className="font-medium text-slate-800">Are you sure you want to mark this bid as {newStatus}?</p>
+                <div className="flex gap-2 justify-end">
+                    <button 
+                        onClick={() => toast.dismiss(t.id)} 
+                        className="px-3 py-1.5 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-md transition-colors"
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        onClick={async () => {
+                            toast.dismiss(t.id);
+                            try {
+                                await api.put(`/bids/${bidId}/status`, { status: newStatus });
+                                
+                                // Update local state
+                                setBids((prevBids) => prevBids.map(b => b.id === bidId ? { ...b, status: newStatus } : b));
+                                
+                                toast.success(`Bid ${newStatus} successfully.`);
+                            } catch (error) {
+                                console.error("Failed to update bid status", error);
+                                toast.error("Failed to update bid status.");
+                            }
+                        }} 
+                        className={`px-3 py-1.5 text-sm font-medium text-white rounded-md transition-colors ${actionColor}`}
+                    >
+                        Confirm
+                    </button>
+                </div>
+            </div>
+        ), { duration: Infinity });
     };
 
     if (loading) {

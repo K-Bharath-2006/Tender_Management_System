@@ -28,17 +28,36 @@ const ManageTenders = () => {
         fetchTenders();
     }, []);
 
-    const handleDelete = async (id) => {
-        if (window.confirm("Are you sure you want to delete this tender?")) {
-            try {
-                await api.delete(`/tenders/${id}`);
-                setTenders(tenders.filter(t => t.id !== id));
-                toast.success("Tender deleted!");
-            } catch (error) {
-                console.error("Error deleting tender", error);
-                toast.error("Could not delete tender");
-            }
-        }
+    const handleDelete = (id) => {
+        toast((t) => (
+            <div className="flex flex-col gap-3">
+                <p className="font-medium text-slate-800">Are you sure you want to delete this tender?</p>
+                <div className="flex gap-2 justify-end">
+                    <button 
+                        onClick={() => toast.dismiss(t.id)} 
+                        className="px-3 py-1.5 text-sm font-medium text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-md transition-colors"
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        onClick={async () => {
+                            toast.dismiss(t.id);
+                            try {
+                                await api.delete(`/tenders/${id}`);
+                                setTenders((prevTenders) => prevTenders.filter(t => t.id !== id));
+                                toast.success("Tender deleted!");
+                            } catch (error) {
+                                console.error("Error deleting tender", error);
+                                toast.error("Could not delete tender");
+                            }
+                        }} 
+                        className="px-3 py-1.5 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-md transition-colors"
+                    >
+                        Delete
+                    </button>
+                </div>
+            </div>
+        ), { duration: Infinity });
     };
 
     // Assuming we want to toggle status via API PUT

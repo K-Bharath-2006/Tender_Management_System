@@ -28,7 +28,7 @@ public class BidController {
     }
 
     @GetMapping("/tenders/{tenderId}/bids")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('VENDOR')")
     public ResponseEntity<?> getBidsForTender(@PathVariable Long tenderId) {
         return ResponseEntity.ok(bidService.getBidsForTender(tenderId));
     }
