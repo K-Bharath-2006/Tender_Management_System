@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
-import { BiBuilding, BiMap, BiRupee, BiCalendar, BiInfoCircle, BiFile } from 'react-icons/bi';
+import { BiBuilding, BiMap, BiRupee, BiCalendar, BiInfoCircle } from 'react-icons/bi';
 
 const TenderDetails = () => {
     const { id } = useParams();
@@ -105,26 +105,16 @@ const TenderDetails = () => {
                             </div>
                         </div>
 
-                        <div className="border-t border-slate-200 mt-8 pt-8 flex items-center justify-between flex-wrap gap-4">
-                            <div className="flex items-center gap-3">
-                                <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center border border-blue-100">
-                                    <BiFile className="w-6 h-6" />
-                                </div>
-                                <div>
-                                    <p className="font-semibold text-slate-800">Tender_Document_V1.pdf</p>
-                                    <p className="text-xs text-slate-500">2.4 MB</p>
-                                </div>
-                            </div>
-
-                            {user?.role === 'ROLE_VENDOR' && !isClosed && (
+                        {user?.role === 'ROLE_VENDOR' && !isClosed && (
+                            <div className="border-t border-slate-200 mt-8 pt-8 flex justify-end">
                                 <Link
                                     to={`/submit-bid/${tender.id}`}
                                     className="bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors shadow-md shadow-primary-600/20"
                                 >
                                     Submit Bid Proposal
                                 </Link>
-                            )}
-                        </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </main>
