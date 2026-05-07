@@ -5,6 +5,7 @@ import com.tms.backend.entity.Bid;
 import com.tms.backend.entity.Tender;
 import com.tms.backend.entity.User;
 import com.tms.backend.enums.BidStatus;
+import com.tms.backend.enums.TenderStatus;
 import com.tms.backend.exception.ResourceNotFoundException;
 import com.tms.backend.repository.BidRepository;
 import com.tms.backend.repository.TenderRepository;
@@ -70,6 +71,12 @@ public class BidService {
 
         bid.setStatus(status);
         Bid updatedBid = bidRepository.save(bid);
+
+        if (status == BidStatus.APPROVED) {
+            Tender tender = bid.getTender();
+            tender.setStatus(TenderStatus.CLOSED);
+            tenderRepository.save(tender);
+        }
 
         BidDto dto = modelMapper.map(updatedBid, BidDto.class);
         dto.setTenderId(updatedBid.getTender().getId());
